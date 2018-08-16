@@ -21,6 +21,7 @@ public class Discount {
 	private int discountPercent;
 	private Date issueDate;
 	private Date expiryDate;
+	private String promoName;
 	public int getDiscountId() {
 		return discountId;
 	}
@@ -64,8 +65,16 @@ public class Discount {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	
+	public String getPromoName() {
+		return promoName;
+	}
+	public void setPromoName(String promoName) {
+		this.promoName = promoName;
+	}
+	
 	public Discount(int discountId, Inventory inventory, Category category, double promoAmount, int discountPercent,
-			Date issueDate, Date expiryDate) {
+			Date issueDate, Date expiryDate, String promoName) {
 		super();
 		this.discountId = discountId;
 		this.inventory = inventory;
@@ -74,6 +83,7 @@ public class Discount {
 		this.discountPercent = discountPercent;
 		this.issueDate = issueDate;
 		this.expiryDate = expiryDate;
+		this.promoName = promoName;
 	}
 	public Discount() {
 		
