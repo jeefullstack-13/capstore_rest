@@ -15,9 +15,6 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 private int categoryId;
 private String categoryName;
-@OneToOne(fetch=FetchType.EAGER)
-@JoinColumn(name="discountId")
-private Discount dis;
 
 public int getCategoryId() {
 	return categoryId;
@@ -30,19 +27,12 @@ public Category(int categoryId, String categoryName, Discount discount) {
 	super();
 	this.categoryId = categoryId;
 	this.categoryName = categoryName;
-	this.dis = discount;
 }
 public String getCategoryName() {
 	return categoryName;
 }
 public void setCategoryName(String categoryName) {
 	this.categoryName = categoryName;
-}
-public Discount getDiscount() {
-	return dis;
-}
-public void setDiscount(Discount discount) {
-	this.dis = discount;
 }
 public Category() {
 	super();
