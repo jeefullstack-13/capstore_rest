@@ -10,7 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
 public class ReturnOrders {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -31,7 +34,12 @@ public class ReturnOrders {
 	private Date returnDate;
 	private Boolean merchantValidation;
 	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="merchantId")
+	private Merchant merchant;
 	
+	@OneToOne(targetEntity = RefundMoney.class, mappedBy = "returnOrder")
+	private RefundMoney refundMoney;
 	public Transaction getTransaction() {
 		return transaction;
 	}
@@ -41,6 +49,18 @@ public class ReturnOrders {
 	
 	
 	
+	public RefundMoney getRefundMoney() {
+		return refundMoney;
+	}
+	public void setRefundMoney(RefundMoney refundMoney) {
+		this.refundMoney = refundMoney;
+	}
+	public Merchant getMerchant() {
+		return merchant;
+	}
+	public void setMerchant(Merchant merchant) {
+		this.merchant = merchant;
+	}
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -86,9 +106,9 @@ public class ReturnOrders {
 	public ReturnOrders() {
 		super();
 	}
-	
 	public ReturnOrders(int returnId, Order order, Customer customer, Transaction transaction, String description,
-			String returnMode, Date returnDate, Boolean merchantValidation) {
+			String returnMode, Date returnDate, Boolean merchantValidation, Merchant merchant,
+			RefundMoney refundMoney) {
 		super();
 		this.returnId = returnId;
 		this.order = order;
@@ -98,7 +118,11 @@ public class ReturnOrders {
 		this.returnMode = returnMode;
 		this.returnDate = returnDate;
 		this.merchantValidation = merchantValidation;
+		this.merchant = merchant;
+		this.refundMoney = refundMoney;
 	}
+	
+	
 
 	
 	

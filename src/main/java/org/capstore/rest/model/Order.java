@@ -13,35 +13,36 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
 @Table(name="caporder")
 public class Order{
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int orderId;
-	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="customerId")
 	private Customer customer;
-	
 	@OneToMany(targetEntity = ManagingCart.class, mappedBy = "order")
 	private  List<ManagingCart> managingCart;
-	
+	@JsonFormat(pattern="dd-MMM-yyyy")
 	private Date orderDate;
+	@JsonFormat(pattern="dd-MMM-yyyy")
 	private Date deliveredDate;
-	
 	@OneToOne(targetEntity = Shipping.class, mappedBy = "order")
 	private Shipping shipping;
-	
 	private String deliveryStatus;
-	
 	@OneToOne(targetEntity = Transaction.class, mappedBy = "order")
 	private Transaction transaction;
 	
 	@OneToOne(targetEntity = ReturnOrders.class, mappedBy = "order") 
 	private ReturnOrders returnOrder;
 	
+	@OneToOne(targetEntity = GenerateInvoice.class, mappedBy = "order") 
+	private GenerateInvoice generateInvoice;
 	public ReturnOrders getReturnOrder() {
 		return returnOrder;
 	}
@@ -97,8 +98,12 @@ public class Order{
 		this.transaction = transaction;
 	}
 	
+	public Order() {
+		super();
+	}
 	public Order(int orderId, Customer customer, List<ManagingCart> managingCart, Date orderDate, Date deliveredDate,
-			Shipping shipping, String deliveryStatus, Transaction transaction, ReturnOrders returnOrder) {
+			Shipping shipping, String deliveryStatus, Transaction transaction, ReturnOrders returnOrder,
+			GenerateInvoice generateInvoice) {
 		super();
 		this.orderId = orderId;
 		this.customer = customer;
@@ -109,9 +114,13 @@ public class Order{
 		this.deliveryStatus = deliveryStatus;
 		this.transaction = transaction;
 		this.returnOrder = returnOrder;
+		this.generateInvoice = generateInvoice;
 	}
-	public Order() {
-		super();
+	public GenerateInvoice getGenerateInvoice() {
+		return generateInvoice;
+	}
+	public void setGenerateInvoice(GenerateInvoice generateInvoice) {
+		this.generateInvoice = generateInvoice;
 	}
 	
 	

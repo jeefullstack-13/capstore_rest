@@ -8,7 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
 public class Discount {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -20,6 +23,8 @@ public class Discount {
 	private Date issueDate;
 	private Date expiryDate;
 	private String promoName;
+	@OneToOne(targetEntity=InvoiceProduct.class, mappedBy="discount")
+	private InvoiceProduct invoiceProduct;
 	public int getDiscountId() {
 		return discountId;
 	}
@@ -57,15 +62,24 @@ public class Discount {
 		this.expiryDate = expiryDate;
 	}
 	
+	public Discount() {
+		
+	}
+	public InvoiceProduct getInvoiceProduct() {
+		return invoiceProduct;
+	}
+	public void setInvoiceProduct(InvoiceProduct invoiceProduct) {
+		this.invoiceProduct = invoiceProduct;
+	}
+	
 	public String getPromoName() {
 		return promoName;
 	}
 	public void setPromoName(String promoName) {
 		this.promoName = promoName;
 	}
-	
-	public Discount(int discountId, Inventory inventory, double promoAmount, int discountPercent,
-			Date issueDate, Date expiryDate, String promoName) {
+	public Discount(int discountId, Inventory inventory, double promoAmount, int discountPercent, Date issueDate,
+			Date expiryDate, String promoName, InvoiceProduct invoiceProduct) {
 		super();
 		this.discountId = discountId;
 		this.inventory = inventory;
@@ -74,9 +88,9 @@ public class Discount {
 		this.issueDate = issueDate;
 		this.expiryDate = expiryDate;
 		this.promoName = promoName;
+		this.invoiceProduct = invoiceProduct;
 	}
-	public Discount() {
-		
-	}
+	
+	
 	
 }

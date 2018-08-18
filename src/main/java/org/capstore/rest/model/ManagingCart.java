@@ -12,7 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
 public class ManagingCart {
 
 	@Id
@@ -21,7 +24,8 @@ private int cartId;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="customerId")
 private Customer customer;
-	@OneToOne(targetEntity = Inventory.class, mappedBy = "managingCart")
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="productId")
 private Inventory inventory;
 private int quantity;
 private String status;

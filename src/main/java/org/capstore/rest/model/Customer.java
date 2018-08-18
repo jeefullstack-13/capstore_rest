@@ -15,7 +15,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
 public class Customer {
 
 	@Id
@@ -31,7 +34,7 @@ public class Customer {
 	@OneToMany(targetEntity = Address.class, mappedBy = "customer")
 	private List<Address> address;
 	private Date lastLogin;
-	private String isActive;
+	private boolean isActive;
 	@OneToOne(targetEntity = Shipping.class, mappedBy = "customer")
 	private Shipping shipping;
 	@OneToMany(targetEntity = BankAccount.class, mappedBy = "customer")
@@ -50,16 +53,18 @@ public class Customer {
 	@OneToMany(targetEntity = WishList.class, mappedBy = "customer")
 	private List<WishList> wishList;
 	
+	@OneToOne(targetEntity = GenerateInvoice.class, mappedBy = "customer")
+	private GenerateInvoice generateInvoice;
 	public Customer() {
 		
 	}
 
 	
 
-	public Customer(int customerId, String customerName, String phoneNumber, String emailId, Date dateOfBirth,
-			String password, List<Address> address, Date lastLogin, String isActive, Shipping shipping,
+public Customer(int customerId, String customerName, String phoneNumber, String emailId, Date dateOfBirth,
+			String password, List<Address> address, Date lastLogin, boolean isActive, Shipping shipping,
 			List<BankAccount> bank, List<ManagingCart> managingCart, List<Order> order, List<FeedBack> feedBack,
-			List<ReturnOrders> returnOrders, List<WishList> wishList) {
+			List<ReturnOrders> returnOrders, List<WishList> wishList, GenerateInvoice generateInvoice) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
@@ -77,11 +82,22 @@ public class Customer {
 		this.feedBack = feedBack;
 		this.returnOrders = returnOrders;
 		this.wishList = wishList;
+		this.generateInvoice = generateInvoice;
 	}
 
 
 
-	public List<ReturnOrders> getReturnOrders() {
+public GenerateInvoice getGenerateInvoice() {
+		return generateInvoice;
+	}
+
+
+public void setGenerateInvoice(GenerateInvoice generateInvoice) {
+		this.generateInvoice = generateInvoice;
+	}
+
+
+public List<ReturnOrders> getReturnOrders() {
 		return returnOrders;
 	}
 
@@ -157,13 +173,19 @@ public class Customer {
 		this.lastLogin = lastLogin;
 	}
 
-	public String getIsActive() {
+	
+
+	public boolean isActive() {
 		return isActive;
 	}
 
-	public void setIsActive(String isActive) {
+
+
+	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+
+
 
 	public Shipping getShipping() {
 		return shipping;
