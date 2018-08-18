@@ -18,16 +18,16 @@ public class Shipping {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	
 	private int shippingId;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="customerId")
 	private Customer customer; 
 	@OneToOne(targetEntity=Address.class,mappedBy="shipping")
 
 	private Address shippingAddress;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="orderId")
 	private Order order;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="eId")
 	private Email email;
 	public Shipping() {

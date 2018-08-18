@@ -26,10 +26,10 @@ public class Inventory {
 	private int productId;
 	private String productName;
 	private String description;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="brandId")
 	private Brand brand; 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="merchantId")
 	private Merchant merchant;
 	private int noOfViews;
@@ -42,10 +42,10 @@ public class Inventory {
 	private Date expiryDate;
 	@OneToOne(targetEntity = ManagingCart.class, mappedBy = "inventory")
 	private ManagingCart managingCart;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="discountId")
 	private Discount discount;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="couponId")
 	private Coupons coupon;
 	@OneToMany(targetEntity=FeedBack.class, mappedBy="inventory")

@@ -21,11 +21,11 @@ public class InvoiceProduct {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 private int invoiceProductId;
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.LAZY)
 private List<Inventory> inventory;
 	@OneToOne(targetEntity = GenerateInvoice.class, mappedBy = "invoiceProduct")
 	private GenerateInvoice generateInvoice;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="discountId")
 	private Discount discount;
 	public InvoiceProduct() {

@@ -18,7 +18,7 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 private int categoryId;
 private String categoryName;
-@OneToOne(fetch=FetchType.EAGER)
+@OneToOne(fetch=FetchType.LAZY)
 @JoinColumn(name="discountId")
 private Discount dis;
 

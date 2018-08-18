@@ -15,7 +15,7 @@ public class ProductImages {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int imageId;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="productId")
 	private Inventory inventory;
 	private String uploadimage;

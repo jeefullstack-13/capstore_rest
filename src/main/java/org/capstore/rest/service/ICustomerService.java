@@ -8,4 +8,8 @@ public interface ICustomerService {
 
 	public List<Customer> getAllCustomers();
 
+	Customer findOne(Integer customerId);
+
+	List<Customer> getAllCustomer();
+
 }

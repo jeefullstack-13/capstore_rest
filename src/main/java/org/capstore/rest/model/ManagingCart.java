@@ -21,15 +21,15 @@ public class ManagingCart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 private int cartId;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="customerId")
 private Customer customer;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="productId")
 private Inventory inventory;
 private int quantity;
 private String status;
-@ManyToOne(fetch=FetchType.EAGER)
+@ManyToOne(fetch=FetchType.LAZY)
 @JoinColumn(name="orderId")
 private Order order;
 
