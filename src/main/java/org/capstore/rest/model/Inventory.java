@@ -9,10 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -25,7 +26,9 @@ public class Inventory {
 	private int productId;
 	private String productName;
 	private String description;
-	private int brandId;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="brandId")
+	private Brand brand; 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="merchantId")
 	private Merchant merchant;
@@ -76,12 +79,15 @@ public class Inventory {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getBrandId() {
-		return brandId;
+	
+	public Brand getBrand() {
+		return brand;
 	}
-	public void setBrandId(int brandId) {
-		this.brandId = brandId;
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
+
 	public Merchant getMerchant() {
 		return merchant;
 	}
@@ -172,7 +178,7 @@ public class Inventory {
 		this.invoiceProduct = invoiceProduct;
 	}
 
-	public Inventory(int productId, String productName, String description, int brandId, Merchant merchant,
+	public Inventory(int productId, String productName, String description, Brand brand, Merchant merchant,
 			int noOfViews, String category, Date dateOfInclusion, double price, List<ProductImages> uploadimage,
 			int quantity, Date expiryDate, ManagingCart managingCart, Discount discount, Coupons coupon,
 			List<FeedBack> feedback, List<WishList> wishList, InvoiceProduct invoiceProduct) {
@@ -180,7 +186,7 @@ public class Inventory {
 		this.productId = productId;
 		this.productName = productName;
 		this.description = description;
-		this.brandId = brandId;
+		this.brand = brand;
 		this.merchant = merchant;
 		this.noOfViews = noOfViews;
 		Category = category;
@@ -196,18 +202,6 @@ public class Inventory {
 		this.wishList = wishList;
 		this.invoiceProduct = invoiceProduct;
 	}
-	
-	
-
-	
-	
-
-	
-
-	
-
-	
-	
 
 	
 	
