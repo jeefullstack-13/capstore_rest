@@ -23,7 +23,7 @@ public class Order{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int orderId;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="customerId")
 	private Customer customer;
 	@OneToMany(targetEntity = ManagingCart.class, mappedBy = "order")

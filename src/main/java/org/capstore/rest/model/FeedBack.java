@@ -17,14 +17,14 @@ public class FeedBack {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int feedBackId;
-	@ManyToOne(fetch=FetchType.EAGER)	
+	@ManyToOne(fetch=FetchType.LAZY)	
 @JoinColumn(name="customerId")
 private Customer customer;
 	
-	@ManyToOne(fetch=FetchType.EAGER)	
+	@ManyToOne(fetch=FetchType.LAZY)	
 	@JoinColumn(name="productId")	
 private Inventory inventory;
-	@ManyToOne(fetch=FetchType.EAGER)	
+	@ManyToOne(fetch=FetchType.LAZY)	
 	@JoinColumn(name="merchantId")	
 	
 	private Merchant merchant;

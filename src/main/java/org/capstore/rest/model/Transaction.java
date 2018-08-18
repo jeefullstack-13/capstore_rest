@@ -19,7 +19,7 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)	
 private int transactionId;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="orderId")
 private Order order;
 private double amount;

@@ -16,13 +16,13 @@ public class RefundMoney {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 private int refundId;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="returnOrderId")
 private ReturnOrders returnOrder;
-@OneToOne(fetch=FetchType.EAGER)
+@OneToOne(fetch=FetchType.LAZY)
 @JoinColumn(name="transactionId")
 private Transaction transaction;
-@OneToOne(fetch=FetchType.EAGER)
+@OneToOne(fetch=FetchType.LAZY)
 @JoinColumn(name="bankAccountId")
 private BankAccount bankAccount;
 public int getRefundId() {
