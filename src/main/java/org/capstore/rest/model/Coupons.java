@@ -8,7 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
 public class Coupons {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -20,6 +23,8 @@ private Date issueDate;
 private Date expiryDate;
 @OneToOne(targetEntity=Inventory.class, mappedBy="coupon")
 private Inventory inventory;
+@OneToOne(targetEntity = GenerateInvoice.class, mappedBy = "coupon")
+private GenerateInvoice generateInvoice; 
 
 public int getCouponId() {
 	return couponId;

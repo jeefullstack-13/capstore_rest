@@ -9,7 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
 public class Shipping {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -24,7 +27,9 @@ public class Shipping {
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="orderId")
 	private Order order;
-	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="eId")
+	private Email email;
 	public Shipping() {
 		
 	}
@@ -63,15 +68,24 @@ public class Shipping {
 		this.order = order;
 	}
 
-	public Shipping(int shippingId, Customer customer, Address shippingAddress, Order order) {
+	public Email getEmail() {
+		return email;
+	}
+
+	public void setEmail(Email email) {
+		this.email = email;
+	}
+
+	public Shipping(int shippingId, Customer customer, Address shippingAddress, Order order, Email email) {
 		super();
 		this.shippingId = shippingId;
-		
 		this.customer = customer;
 		this.shippingAddress = shippingAddress;
 		this.order = order;
+		this.email = email;
 	}
 
+	
 	
 
 }

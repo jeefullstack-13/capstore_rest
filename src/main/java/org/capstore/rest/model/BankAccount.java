@@ -7,8 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
 public class BankAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,6 +25,15 @@ public class BankAccount {
 	private long cardNumber;
 	private double balance;
 	private int cvvNumber;
+	@OneToOne(targetEntity = RefundMoney.class, mappedBy = "bankAccount")
+	private RefundMoney refundMoney;
+	
+	public RefundMoney getRefundMoney() {
+		return refundMoney;
+	}
+	public void setRefundMoney(RefundMoney refundMoney) {
+		this.refundMoney = refundMoney;
+	}
 	public int getBankAccountId() {
 		return bankAccountId;
 	}
@@ -57,8 +70,9 @@ public class BankAccount {
 	public void setCvvNumber(int cvvNumber) {
 		this.cvvNumber = cvvNumber;
 	}
+	
 	public BankAccount(int bankAccountId, Customer customer, long accountNumber, long cardNumber, double balance,
-			int cvvNumber) {
+			int cvvNumber, RefundMoney refundMoney) {
 		super();
 		this.bankAccountId = bankAccountId;
 		this.customer = customer;
@@ -66,6 +80,7 @@ public class BankAccount {
 		this.cardNumber = cardNumber;
 		this.balance = balance;
 		this.cvvNumber = cvvNumber;
+		this.refundMoney = refundMoney;
 	}
 	public BankAccount() {
 		

@@ -6,8 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
 public class Email {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,11 +22,13 @@ public class Email {
 	private String to_emailId;
 	private String body;
 	private String subject;
+	@JsonFormat(pattern="dd-MMM-yyyy")
 	private Date date;
+	@OneToOne(targetEntity = Shipping.class, mappedBy = "email") 
+	private Shipping shippingAddress;
 	public Email() {
 		
 	}
-	
 	
 	public int geteID() {
 		return eID;
@@ -31,6 +39,14 @@ public class Email {
 		this.eID = eID;
 	}
 
+
+	public Shipping getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(Shipping shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
 
 	public String getFrom_emailId() {
 		return from_emailId;
@@ -63,8 +79,8 @@ public class Email {
 		this.date = date;
 	}
 
-
-	public Email(int eID, String from_emailId, String to_emailId, String body, String subject, Date date) {
+	public Email(int eID, String from_emailId, String to_emailId, String body, String subject, Date date,
+			Shipping shippingAddress) {
 		super();
 		this.eID = eID;
 		this.from_emailId = from_emailId;
@@ -72,7 +88,11 @@ public class Email {
 		this.body = body;
 		this.subject = subject;
 		this.date = date;
+		this.shippingAddress = shippingAddress;
 	}
+
+
+	
 	
 
 }

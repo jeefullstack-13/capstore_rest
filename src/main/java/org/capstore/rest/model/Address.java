@@ -9,7 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
 public class Address {
 
 	@Id
@@ -21,7 +24,7 @@ public class Address {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="merchantId")
 	private Merchant merchant;
-	private int streetNumber;
+	private String streetNumber;
 	private String city;
 	private String state;
 	private String country;
@@ -50,10 +53,11 @@ public class Address {
 	public void setMerchant(Merchant merchant) {
 		this.merchant = merchant;
 	}
-	public int getStreetNumber() {
+	
+	public String getStreetNumber() {
 		return streetNumber;
 	}
-	public void setStreetNumber(int streetNumber) {
+	public void setStreetNumber(String streetNumber) {
 		this.streetNumber = streetNumber;
 	}
 	public String getCity() {
@@ -91,7 +95,7 @@ public class Address {
 	public Address() {
 		
 	}
-	public Address(int addressId, Customer customer, Merchant merchant, int streetNumber, String city, String state,
+	public Address(int addressId, Customer customer, Merchant merchant, String streetNumber, String city, String state,
 			String country, int zipcode, Shipping shipping) {
 		super();
 		this.addressId = addressId;
@@ -104,6 +108,7 @@ public class Address {
 		this.zipcode = zipcode;
 		this.shipping = shipping;
 	}
+	
 	
 
 }
