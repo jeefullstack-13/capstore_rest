@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.capstore.rest.model.Customer;
 
-public interface ICustomerService {
+public interface IPasswordService {
 
 	public List<Customer> getAllCustomers();
 

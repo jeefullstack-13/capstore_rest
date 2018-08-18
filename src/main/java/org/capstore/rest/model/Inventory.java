@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -25,6 +24,9 @@ public class Inventory {
 	private int productId;
 	private String productName;
 	private String description;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="brandId")
 	private int brandId;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="merchantId")
