@@ -28,9 +28,9 @@ public class Inventory {
 	private String description;
 
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+/*	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="brandId")
-	private int brandId;
+	private int brandId;*/
 	
 
 	@ManyToOne(fetch=FetchType.LAZY)

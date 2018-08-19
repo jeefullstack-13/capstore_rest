@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.capstore.rest.model.Customer;
-import org.capstore.rest.service.CustomerService;
+
+import org.capstore.rest.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminCustomerController {
 
     @Autowired
-    private CustomerService customerService;
+    private ICustomerService customerService;
 
 
     	
     	@GetMapping("/admincustomer")
     	public ResponseEntity<List<Customer>> getAllCustomers(){
-    		List<Customer> pilots= customerService.getAllCustomer();
-    		if(pilots.isEmpty()||pilots==null)
+    		List<Customer> customers= customerService.getAllCustomer();
+    		if(customers.isEmpty()||customers==null)
     			return new ResponseEntity
-    				("Sorry! Pilot details not available!",HttpStatus.NOT_FOUND);
-    		return new ResponseEntity<List<Customer>>(pilots,HttpStatus.OK);
+    				("Sorry! Customer details not available!",HttpStatus.NOT_FOUND);
+    		return new ResponseEntity<List<Customer>>(customers,HttpStatus.OK);
     	}
     	
     /*	@GetMapping("/admincustomer/{customerId}")
@@ -50,7 +51,7 @@ public class AdminCustomerController {
     		
     		
     		for (Customer c : customer) {
-				if(c.getCustomerName().equals(customerName)) {
+				if(c.getCustomerName().contains(customerName)) {
 					
 					Customer cust=new Customer();
 					cust.setCustomerId(c.getCustomerId());
@@ -60,10 +61,11 @@ public class AdminCustomerController {
 					
 					customer1.add(cust);
 				}
+						
 			}
     		if(customer1==null)
     			return new ResponseEntity
-    				("Sorry! Pilot details not available!",HttpStatus.NOT_FOUND);
+    				("Sorry! Customer details not available!",HttpStatus.NOT_FOUND);
     		return new ResponseEntity<List<Customer>>(customer1,HttpStatus.OK);
     	}
     	

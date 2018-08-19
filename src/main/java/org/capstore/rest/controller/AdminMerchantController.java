@@ -26,7 +26,7 @@ public class AdminMerchantController {
 		List<Merchant> merchants= merchantService.getAllMerchant();
 		if(merchants.isEmpty()||merchants==null)
 			return new ResponseEntity
-				("Sorry! Pilot details not available!",HttpStatus.NOT_FOUND);
+				("Sorry! Merchant details not available!",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Merchant>>(merchants,HttpStatus.OK);
 	}
 	
@@ -37,7 +37,7 @@ public class AdminMerchantController {
 		
 		
 		for (Merchant c : merchant) {
-			if(c.getName().equals(name)) {
+			if(c.getName().contains(name)) {
 				
 				Merchant mer=new Merchant();
 				mer.setMerchantId(c.getMerchantId());
@@ -51,7 +51,7 @@ public class AdminMerchantController {
 		}
 		if(merchant1==null)
 			return new ResponseEntity
-				("Sorry! Pilot details not available!",HttpStatus.NOT_FOUND);
+				("Sorry! Merchant details not available!",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Merchant>>(merchant1,HttpStatus.OK);
 	}
 }
