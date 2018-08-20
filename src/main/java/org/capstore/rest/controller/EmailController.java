@@ -6,7 +6,7 @@ import java.util.List;
 import org.capstore.rest.model.Admin;
 import org.capstore.rest.model.Customer;
 import org.capstore.rest.model.Email;
-import org.capstore.rest.service.IAdminService;
+import org.capstore.rest.service.AdminService;
 import org.capstore.rest.service.ICustomerService;
 import org.capstore.rest.service.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class EmailController {
 	private ICustomerService customerService;
 	
 	@Autowired
-	private IAdminService adminService;
+	private AdminService adminService;
 	
 	@GetMapping("/emails")
 	public ResponseEntity<List<Email>> getAllEmail(){

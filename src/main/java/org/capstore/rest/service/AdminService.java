@@ -6,5 +6,5 @@ import org.capstore.rest.model.Admin;
 
 public interface AdminService {
 
-	public List<Admin> getAdmin();
+	public List<Admin> getAdminEmail();
 }
