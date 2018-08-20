@@ -1,5 +1,4 @@
 package org.capstore.rest.service;
-
 import java.util.List;
 
 import org.capstore.rest.dao.CustomerDao;
@@ -7,14 +6,21 @@ import org.capstore.rest.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class CustomerServiceImpl implements CustomerService{
+@Service("customerService")
+public class CustomerServiceImpl implements ICustomerService{
+	
 	@Autowired
-    private CustomerDao customerDao;
+	private CustomerDao customerDao;
 
+	@Override
+	public List<Customer> getAllCustomers() {
+		
+		return customerDao.findAll();
+	}
     
     
     
+
 	@Override
     public Customer findOne(Integer customerId){
     	return customerDao.getOne(customerId);
@@ -23,5 +29,6 @@ public class CustomerServiceImpl implements CustomerService{
     public List<Customer> getAllCustomer(){
     	return (List<Customer>) customerDao.findAll();
     }
-    
+
 }
+

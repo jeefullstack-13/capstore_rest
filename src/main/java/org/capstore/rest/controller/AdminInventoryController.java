@@ -26,7 +26,7 @@ public class AdminInventoryController {
 		List<Inventory> inventories= inventoryService.getAllInventory();
 		if(inventories.isEmpty()||inventories==null)
 			return new ResponseEntity
-				("Sorry! Pilot details not available!",HttpStatus.NOT_FOUND);
+				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Inventory>>(inventories,HttpStatus.OK);
 	}
 	
@@ -37,7 +37,7 @@ public class AdminInventoryController {
 		
 		
 		for (Inventory c : inventory) {
-			if(c.getProductName().equals(productName)) {
+			if(c.getProductName().contains(productName)) {
 				
 				Inventory inv=new Inventory();
 				inv.setProductId(c.getProductId());
@@ -48,11 +48,87 @@ public class AdminInventoryController {
 				
 				inventory1.add(inv);
 			}
+			
 		}
 		if(inventory1==null)
 			return new ResponseEntity
-				("Sorry! Pilot details not available!",HttpStatus.NOT_FOUND);
+				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Inventory>>(inventory1,HttpStatus.OK);
 	}
-
+	@RequestMapping("/admininventory1/{category1}")
+	public ResponseEntity<List<Inventory>> findInventory1(@PathVariable("category1") String category1) {
+		List<Inventory> inventory= inventoryService.getAllInventory();
+		List<Inventory> inventory1=new ArrayList();
+		
+		category1="Electronics";
+		for (Inventory c : inventory) {
+			if(c.getCategory().contains(category1)) {
+				
+				Inventory inv=new Inventory();
+				inv.setProductId(c.getProductId());
+				inv.setProductName(c.getProductName());
+				inv.setPrice(c.getPrice());
+				inv.setCategory(c.getCategory());
+				
+				
+				inventory1.add(inv);
+			}
+			
+		}
+		if(inventory1==null)
+			return new ResponseEntity
+				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Inventory>>(inventory1,HttpStatus.OK);
+	}
+	@RequestMapping("/admininventory2/{category2}")
+	public ResponseEntity<List<Inventory>> findInventory2(@PathVariable("category2") String category2) {
+		List<Inventory> inventory= inventoryService.getAllInventory();
+		List<Inventory> inventory1=new ArrayList();
+		
+		category2="Clothing";
+		for (Inventory c : inventory) {
+			if(c.getCategory().contains(category2)) {
+				
+				Inventory inv=new Inventory();
+				inv.setProductId(c.getProductId());
+				inv.setProductName(c.getProductName());
+				inv.setPrice(c.getPrice());
+				inv.setCategory(c.getCategory());
+				
+				
+				inventory1.add(inv);
+			}
+			
+		}
+		if(inventory1==null)
+			return new ResponseEntity
+				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Inventory>>(inventory1,HttpStatus.OK);
+	}
+	
+	@RequestMapping("/admininventory3/{category3}")
+	public ResponseEntity<List<Inventory>> findInventory3(@PathVariable("category3") String category3) {
+		List<Inventory> inventory= inventoryService.getAllInventory();
+		List<Inventory> inventory1=new ArrayList();
+		
+		category3="Books";
+		for (Inventory c : inventory) {
+			if(c.getCategory().contains(category3)) {
+				
+				Inventory inv=new Inventory();
+				inv.setProductId(c.getProductId());
+				inv.setProductName(c.getProductName());
+				inv.setPrice(c.getPrice());
+				inv.setCategory(c.getCategory());
+				
+				
+				inventory1.add(inv);
+			}
+			
+		}
+		if(inventory1==null)
+			return new ResponseEntity
+				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Inventory>>(inventory1,HttpStatus.OK);
+	}
 }

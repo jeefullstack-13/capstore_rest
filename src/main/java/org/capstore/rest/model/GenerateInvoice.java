@@ -18,21 +18,21 @@ public class GenerateInvoice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 private int invoiceId;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="transactionId")
 	private Transaction transaction;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="customerId")
 	private Customer customer;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="couponId")
 	private Coupons coupon;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="orderId")
 	private Order order;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="invoiceProductId")
 	private InvoiceProduct invoiceProduct;
 	

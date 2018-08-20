@@ -7,12 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}) 
 public class Merchant {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -26,12 +26,16 @@ public class Merchant {
 	private boolean isActive;
 	private String status;
 	private Date lastLogin; 
+	
 	@OneToMany(targetEntity=Address.class,mappedBy="merchant")
 	private List<Address> address;
+	
 	@OneToMany(targetEntity=Inventory.class,mappedBy="merchant")
 	private List<Inventory> inventory;
+	
 	@OneToMany(targetEntity=FeedBack.class,mappedBy="merchant")
 	private List<FeedBack> feedback;
+	
 	@OneToMany(targetEntity=ReturnOrders.class,mappedBy="merchant")
 	private List<ReturnOrders> returnOrder;
 	public Merchant() {
@@ -69,7 +73,7 @@ public class Merchant {
 
 
 
-
+	@JsonIgnore
 	public List<ReturnOrders> getReturnOrder() {
 		return returnOrder;
 	}
@@ -146,18 +150,21 @@ public String getStatus() {
 	public void setLastLogin(Date lastLogin) {
 		this.lastLogin = lastLogin;
 	}
+	@JsonIgnore
 	public List<Address> getAddress() {
 		return address;
 	}
 	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
+	@JsonIgnore
 	public List<Inventory> getInventory() {
 		return inventory;
 	}
 	public void setInventory(List<Inventory> inventory) {
 		this.inventory = inventory;
 	}
+	@JsonIgnore
 	public List<FeedBack> getFeedback() {
 		return feedback;
 	}
