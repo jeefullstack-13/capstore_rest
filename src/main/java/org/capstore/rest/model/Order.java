@@ -13,7 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 @Table(name="caporder")
 public class Order{
 	
@@ -21,7 +24,7 @@ public class Order{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int orderId;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="customerId")
 	private Customer customer;
 	

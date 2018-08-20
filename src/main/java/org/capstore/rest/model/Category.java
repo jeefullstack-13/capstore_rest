@@ -9,13 +9,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 public class Category {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 private int categoryId;
 private String categoryName;
-@OneToOne(fetch=FetchType.EAGER)
+@OneToOne(fetch=FetchType.LAZY)
 @JoinColumn(name="discountId")
 private Discount dis;
 

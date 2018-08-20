@@ -14,8 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 public class Inventory {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -23,11 +26,11 @@ public class Inventory {
 	private String productName;
 	private String description;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="brandId")
 	private Brand brand;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="merchantId")
 	private Merchant merchant;
 	
@@ -42,15 +45,15 @@ public class Inventory {
 	private int quantity;
 	private Date expiryDate;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="managingCart")
 	private ManagingCart managingCart;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="discountId")
 	private Discount discount;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="couponId")
 	private Coupons coupon;
 	
