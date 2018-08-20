@@ -7,10 +7,7 @@ import org.capstore.rest.model.Admin;
 import org.capstore.rest.model.Customer;
 import org.capstore.rest.model.Email;
 import org.capstore.rest.service.AdminService;
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/jeefullstack-13/capstore_rest.git
 import org.capstore.rest.service.ICustomerService;
 import org.capstore.rest.service.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
