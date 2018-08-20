@@ -3,7 +3,8 @@ package org.capstore.rest.service;
 import java.util.List;
 
 import javax.transaction.Transactional;
-
+import org.capstore.rest.dao.BrandDao;
+import org.capstore.rest.dao.ICategoryDao;
 import org.capstore.rest.dao.InventoryDao;
 import org.capstore.rest.dao.MerchantDao;
 import org.capstore.rest.model.Customer;
@@ -24,7 +25,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
 	@Override
-	public void save(Inventory product) {
+	public void save1(Inventory product) {
 		inventoryDao.save(product);
 	}
 	
@@ -40,10 +41,28 @@ public class InventoryServiceImpl implements InventoryService {
 		return inventoryDao.findAll();
 	}
 
-	@Override
-	public Inventory findOne(Integer prodId) {
+		@Override
+	public List<Brand> getAllBrands() {
 		// TODO Auto-generated method stub
-		return inventoryDao.getOne(prodId);
+		return brandDao.findAll();
+	}
+
+	@Override
+	public List<Category> getAllCategories() {
+		
+		return categoryDao.findAll();
+	}
+
+	@Override
+	public void save(Brand br) {
+		brandDao.save(br);
+		
+	}
+
+	@Override
+	public void save2(Category cg) {
+		categoryDao.save(cg);
+		
 	}
 
 	/*@Override

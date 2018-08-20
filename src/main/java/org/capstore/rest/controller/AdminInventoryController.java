@@ -2,7 +2,7 @@ package org.capstore.rest.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.capstore.rest.model.Brand;
 import org.capstore.rest.model.Category;
 import org.capstore.rest.model.Inventory;
 
