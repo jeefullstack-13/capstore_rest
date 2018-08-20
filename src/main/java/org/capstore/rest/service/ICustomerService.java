@@ -6,10 +6,9 @@ import org.capstore.rest.model.Customer;
 
 public interface ICustomerService {
 
-	public List<Customer> getAllCustomers();
-
+	public List<Customer> getAllCustomerEmail();
+	
 	Customer findOne(Integer customerId);
 
 	List<Customer> getAllCustomer();
-
 }
