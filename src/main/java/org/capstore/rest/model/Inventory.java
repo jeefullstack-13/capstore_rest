@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -26,21 +25,16 @@ public class Inventory {
 	private int productId;
 	private String productName;
 	private String description;
-
-	
-/*	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="brandId")
-	private int brandId;*/
-	
-
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="brandId")
-	private Brand brand; 
+	private Brand brand;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="merchantId")
 	private Merchant merchant;
 	private int noOfViews;
-	private String Category;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="categoryId")
+	private Category category;
 	private Date dateOfInclusion;
 	private double price;
 	@OneToMany(targetEntity=ProductImages.class, mappedBy="inventory")
@@ -107,12 +101,19 @@ public class Inventory {
 	public void setNoOfViews(int noOfViews) {
 		this.noOfViews = noOfViews;
 	}
-	public String getCategory() {
-		return Category;
+	
+	
+
+	
+
+	public Category getCategory() {
+		return category;
 	}
-	public void setCategory(String category) {
-		Category = category;
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
+
 	public Date getDateOfInclusion() {
 		return dateOfInclusion;
 	}
@@ -186,7 +187,7 @@ public class Inventory {
 	}
 
 	public Inventory(int productId, String productName, String description, Brand brand, Merchant merchant,
-			int noOfViews, String category, Date dateOfInclusion, double price, List<ProductImages> uploadimage,
+			int noOfViews, Category category, Date dateOfInclusion, double price, List<ProductImages> uploadimage,
 			int quantity, Date expiryDate, ManagingCart managingCart, Discount discount, Coupons coupon,
 			List<FeedBack> feedback, List<WishList> wishList, InvoiceProduct invoiceProduct) {
 		super();
@@ -196,7 +197,7 @@ public class Inventory {
 		this.brand = brand;
 		this.merchant = merchant;
 		this.noOfViews = noOfViews;
-		Category = category;
+		this.category = category;
 		this.dateOfInclusion = dateOfInclusion;
 		this.price = price;
 		this.uploadimage = uploadimage;
@@ -212,4 +213,4 @@ public class Inventory {
 
 	
 	
-}
+	}

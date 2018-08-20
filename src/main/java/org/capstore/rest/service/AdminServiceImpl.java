@@ -8,6 +8,8 @@ import org.capstore.rest.model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
 @Service("adminService")
 public class AdminServiceImpl implements IAdminService{
 
@@ -20,6 +22,7 @@ public class AdminServiceImpl implements IAdminService{
 		return adminDao.findAll();
 	}
 	
+
 	
 
 }
