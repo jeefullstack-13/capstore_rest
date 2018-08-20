@@ -15,7 +15,7 @@ public class AdminServiceImpl implements AdminService{
 	private AdminDao adminDao;
 
 	@Override
-	public List<Admin> getAdmin() {
+	public List<Admin> getAdminEmail() {
 		return adminDao.findAll();
 	}
 
