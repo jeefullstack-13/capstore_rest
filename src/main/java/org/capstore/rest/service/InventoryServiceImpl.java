@@ -7,6 +7,8 @@ import org.capstore.rest.dao.BrandDao;
 import org.capstore.rest.dao.ICategoryDao;
 import org.capstore.rest.dao.InventoryDao;
 import org.capstore.rest.dao.MerchantDao;
+import org.capstore.rest.model.Brand;
+import org.capstore.rest.model.Category;
 import org.capstore.rest.model.Customer;
 import org.capstore.rest.model.Inventory;
 
@@ -18,6 +20,12 @@ import org.springframework.stereotype.Service;
 public class InventoryServiceImpl implements InventoryService {
 	@Autowired
     private InventoryDao inventoryDao;
+	
+	@Autowired
+	private BrandDao brandDao;
+	
+	@Autowired
+	private ICategoryDao categoryDao;
 	
 	@Override
     public List<Inventory> getAllInventory(){
@@ -64,6 +72,10 @@ public class InventoryServiceImpl implements InventoryService {
 		categoryDao.save(cg);
 		
 	}
+
+	
+
+	
 
 	/*@Override
 	public Inventory findProduct(Integer productId) {
