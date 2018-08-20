@@ -18,64 +18,54 @@ public class Shipping {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	
 	private int shippingId;
-	@OneToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="customerId")
 	private Customer customer; 
-	@OneToOne(targetEntity=Address.class,mappedBy="shipping")
-
+	
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="Address")
 	private Address shippingAddress;
-	@OneToOne(fetch=FetchType.EAGER)
+	
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="orderId")
 	private Order order;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="eId")
 	private Email email;
 	public Shipping() {
 		
 	}
-
 	public int getShippingId() {
 		return shippingId;
 	}
-
 	public void setShippingId(int shippingId) {
 		this.shippingId = shippingId;
 	}
-
-
-
 	public Customer getCustomer() {
 		return customer;
 	}
-
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
 	public Address getShippingAddress() {
 		return shippingAddress;
 	}
-
 	public void setShippingAddress(Address shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
-
 	public Order getOrder() {
 		return order;
 	}
-
 	public void setOrder(Order order) {
 		this.order = order;
 	}
-
 	public Email getEmail() {
 		return email;
 	}
-
 	public void setEmail(Email email) {
 		this.email = email;
 	}
-
 	public Shipping(int shippingId, Customer customer, Address shippingAddress, Order order, Email email) {
 		super();
 		this.shippingId = shippingId;
@@ -85,7 +75,6 @@ public class Shipping {
 		this.email = email;
 	}
 
-	
 	
 
 }

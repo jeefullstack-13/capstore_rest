@@ -18,15 +18,15 @@ public class ReturnOrders {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int returnId;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="orderId")
 	private Order order;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="customerId")
 	private Customer customer;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="transactionId")
 	private Transaction transaction;
 	private String description;
@@ -34,7 +34,7 @@ public class ReturnOrders {
 	private Date returnDate;
 	private Boolean merchantValidation;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="merchantId")
 	private Merchant merchant;
 	

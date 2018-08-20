@@ -18,5 +18,13 @@ public class CustomerServiceImpl implements ICustomerService{
 	
 		return customerDao.findAll();
 	}
+	@Override
+    public Customer findOne(Integer customerId){
+    	return customerDao.getOne(customerId);
+    }
+	@Override
+    public List<Customer> getAllCustomer(){
+    	return (List<Customer>) customerDao.findAll();
+    }
 
 }
