@@ -66,7 +66,7 @@ public class ForgotRestController {
 	@GetMapping("/admin/{emailId}")
 	public ResponseEntity<Admin> getAdmin(@PathVariable("emailId") String emailId){
 		System.out.println(emailId);
-		List<Admin> admin1=adminService.getAdmin();
+		List<Admin> admin1=adminService.getAdminEmail();
 		Admin admin=new Admin();
 		for (Admin a : admin1) {
 			if(a.getEmail().toString().equals(emailId)) {

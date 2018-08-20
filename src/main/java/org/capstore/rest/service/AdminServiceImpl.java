@@ -19,5 +19,7 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.findAll();
 	}
 
+	
+
 
 }
