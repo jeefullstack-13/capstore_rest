@@ -40,6 +40,12 @@ public class InventoryServiceImpl implements InventoryService {
 		return inventoryDao.findAll();
 	}
 
+	@Override
+	public Inventory findOne(Integer prodId) {
+		// TODO Auto-generated method stub
+		return inventoryDao.getOne(prodId);
+	}
+
 	/*@Override
 	public Inventory findProduct(Integer productId) {
 		// TODO Auto-generated method stub

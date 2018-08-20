@@ -10,4 +10,5 @@ public interface InventoryService {
     public void delete(Integer productId) ;
     public List<Inventory> getAll();
 	List<Inventory> getAllInventory();
+	public Inventory findOne(Integer prodId);
 }

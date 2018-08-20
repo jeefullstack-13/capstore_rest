@@ -55,12 +55,12 @@ public class AdminInventoryController {
 				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Inventory>>(inventory1,HttpStatus.OK);
 	}
-	@RequestMapping("/admininventory1/{category1}")
-	public ResponseEntity<List<Inventory>> findInventory1(@PathVariable("category1") String category1) {
+	@RequestMapping("/admininventory1/electronics")
+	public ResponseEntity<List<Inventory>> findInventory1() {
 		List<Inventory> inventory= inventoryService.getAllInventory();
 		List<Inventory> inventory1=new ArrayList();
 		
-		category1="Electronics";
+		String category1="Electronics";
 		for (Inventory c : inventory) {
 			if(c.getCategory().contains(category1)) {
 				
