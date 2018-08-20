@@ -3,7 +3,7 @@ package org.capstore.rest.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import org.capstore.rest.model.Category;
 import org.capstore.rest.model.Customer;
 import org.capstore.rest.model.Inventory;
 import org.capstore.rest.model.WishList;
@@ -45,8 +45,8 @@ public class WishListController {
 	}
 	
 	@PostMapping("/wishLists/{custId}/{prodId}")
-	public ResponseEntity<WishList> createWishList(@PathVariable("custId") Integer custId, @PathVariable("prodId") Integer prodId) {
-		WishList wishList = new WishList();
+	public ResponseEntity<WishList> createWishList(@PathVariable("custId") Integer custId, @PathVariable("prodId") Integer prodId,@PathVariable("category3") String category3) {
+		/*WishList wishList = new WishList();
 		Customer customer = customerService.findOne(custId);
 		Inventory inventory = inventoryService.findOne(prodId);
 		
@@ -54,9 +54,33 @@ public class WishListController {
 		wishList.setInventory(inventory);
 		wishList.setActive(true);
 		wishListService.save(wishList);
+		return new ResponseEntity<WishList>(HttpStatus.OK);*/
+		List<Inventory> inventory= inventoryService.getAllInventory();
+		List<Inventory> inventory1=new ArrayList();
+		
+		category3="Books";
+		for (Inventory c : inventory) {
+			Category category= c.getCategory();
+			String cat=category.getCategoryName();
+			if(cat.equals(category3)) {
+			
+				Inventory inv=new Inventory();
+				inv.setProductId(c.getProductId());
+				inv.setProductName(c.getProductName());
+				inv.setPrice(c.getPrice());
+				inv.setCategory(c.getCategory());
+				inv.setDescription(c.getDescription());
+				
+				inventory1.add(inv);
+			}
+		}
+		if(inventory1==null)
+			return new ResponseEntity
+				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<WishList>(HttpStatus.OK);
-	}
 	
+		
+}
 	@PutMapping("/wishLists/{custId}/{prodId}/{wishId}")
 	public ResponseEntity<WishList> updateWishList(@PathVariable("custId") Integer custId, @PathVariable("prodId") Integer prodId,
 			@PathVariable("wishId") Integer wishId) {

@@ -3,6 +3,7 @@ package org.capstore.rest.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.capstore.rest.model.Category;
 import org.capstore.rest.model.Inventory;
 
 import org.capstore.rest.service.InventoryService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+
 
 @RestController
 @RequestMapping("/api/v1")
@@ -44,7 +47,7 @@ public class AdminInventoryController {
 				inv.setProductName(c.getProductName());
 				inv.setPrice(c.getPrice());
 				inv.setCategory(c.getCategory());
-				
+				inv.setDescription(c.getDescription());
 				
 				inventory1.add(inv);
 			}
@@ -55,20 +58,25 @@ public class AdminInventoryController {
 				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Inventory>>(inventory1,HttpStatus.OK);
 	}
-	@RequestMapping("/admininventory1/electronics")
+	/*@RequestMapping("/admininventory1/electronics")*/
+	@RequestMapping("/admininventory1/{category1}")
 	public ResponseEntity<List<Inventory>> findInventory1() {
 		List<Inventory> inventory= inventoryService.getAllInventory();
 		List<Inventory> inventory1=new ArrayList();
 		
 		String category1="Electronics";
 		for (Inventory c : inventory) {
-			if(c.getCategory().toString().contains(category1)) {
+			Category category= c.getCategory();
+			String cat=category.getCategoryName();
+		
+			if(cat.equals(category1)) {
 				
 				Inventory inv=new Inventory();
 				inv.setProductId(c.getProductId());
 				inv.setProductName(c.getProductName());
 				inv.setPrice(c.getPrice());
 				inv.setCategory(c.getCategory());
+				inv.setDescription(c.getDescription());
 				
 				
 				inventory1.add(inv);
@@ -87,13 +95,15 @@ public class AdminInventoryController {
 		
 		category2="Clothing";
 		for (Inventory c : inventory) {
-			if(c.getCategory().toString().contains(category2)) {
+			Category category= c.getCategory();
+			String cat=category.getCategoryName();
+			if(cat.equals(category2)) {
 				Inventory inv=new Inventory();
 				inv.setProductId(c.getProductId());
 				inv.setProductName(c.getProductName());
 				inv.setPrice(c.getPrice());
 				inv.setCategory(c.getCategory());
-				
+				inv.setDescription(c.getDescription());
 				
 				inventory1.add(inv);
 			}
@@ -112,14 +122,16 @@ public class AdminInventoryController {
 		
 		category3="Books";
 		for (Inventory c : inventory) {
-			if(c.getCategory().toString().contains(category3)) {
-				
+			Category category= c.getCategory();
+			String cat=category.getCategoryName();
+			if(cat.equals(category3)) {
+			
 				Inventory inv=new Inventory();
 				inv.setProductId(c.getProductId());
 				inv.setProductName(c.getProductName());
 				inv.setPrice(c.getPrice());
 				inv.setCategory(c.getCategory());
-				
+				inv.setDescription(c.getDescription());
 				
 				inventory1.add(inv);
 			}
