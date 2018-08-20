@@ -11,11 +11,9 @@ import org.springframework.stereotype.Service;
 
 
 @Service("adminService")
-<<<<<<< HEAD
+
 public class AdminServiceImpl implements AdminService{
-=======
-public class AdminServiceImpl implements IAdminService{
->>>>>>> branch 'master' of https://github.com/jeefullstack-13/capstore_rest.git
+
 
 	@Autowired
 	private AdminDao adminDao;
@@ -25,10 +23,7 @@ public class AdminServiceImpl implements IAdminService{
 		
 		return adminDao.findAll();
 	}
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'master' of https://github.com/jeefullstack-13/capstore_rest.git
+
 
 	
 
