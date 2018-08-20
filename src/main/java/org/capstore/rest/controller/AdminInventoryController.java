@@ -99,7 +99,7 @@ public class AdminInventoryController {
 		
 		category1="Electronics";
 		for (Inventory c : inventory) {
-			if(c.getCategory().contains(category1)) {
+			if(c.getCategory().toString().contains(category1)) {
 				
 				Inventory inv=new Inventory();
 				inv.setProductId(c.getProductId());
@@ -124,8 +124,7 @@ public class AdminInventoryController {
 		
 		category2="Clothing";
 		for (Inventory c : inventory) {
-			if(c.getCategory().contains(category2)) {
-				
+			if(c.getCategory().toString().contains(category2)) {
 				Inventory inv=new Inventory();
 				inv.setProductId(c.getProductId());
 				inv.setProductName(c.getProductName());
@@ -150,7 +149,7 @@ public class AdminInventoryController {
 		
 		category3="Books";
 		for (Inventory c : inventory) {
-			if(c.getCategory().contains(category3)) {
+			if(c.getCategory().toString().contains(category3)) {
 				
 				Inventory inv=new Inventory();
 				inv.setProductId(c.getProductId());
