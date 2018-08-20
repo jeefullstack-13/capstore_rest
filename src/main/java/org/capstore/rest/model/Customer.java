@@ -18,52 +18,67 @@ import javax.persistence.UniqueConstraint;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"})
 public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private int customerId;
 	private String customerName;
 	private String phoneNumber;
+	
+	
+	
 	@Column(unique=true)
 	private String emailId;
 	private Date dateOfBirth;
 	private String password;
+	
+	
 	@OneToMany(targetEntity = Address.class, mappedBy = "customer")
 	private List<Address> address;
 	private Date lastLogin;
-	private boolean isActive;
-	@OneToOne(targetEntity = Shipping.class, mappedBy = "customer")
-	private Shipping shipping;
+	private String isActive;
+	
+	
+	@OneToMany(targetEntity = Shipping.class, mappedBy = "customer")
+	private List<Shipping> shipping;
+	
+	
 	@OneToMany(targetEntity = BankAccount.class, mappedBy = "customer")
 	private List<BankAccount> bank;
+	
+	
 	@OneToMany(targetEntity = ManagingCart.class, mappedBy = "customer")
 	private List<ManagingCart> managingCart;
+	
+	
 	@OneToMany(targetEntity = Order.class, mappedBy = "customer")
 	private List<Order> order;
+	
 	
 	@OneToMany(targetEntity = FeedBack.class, mappedBy = "customer")
 	private List<FeedBack> feedBack;
 	
+	
 	@OneToMany(targetEntity = ReturnOrders.class, mappedBy = "customer")
 	private List<ReturnOrders> returnOrders; 
 
+	
 	@OneToMany(targetEntity = WishList.class, mappedBy = "customer")
 	private List<WishList> wishList;
 	
-	@OneToOne(targetEntity = GenerateInvoice.class, mappedBy = "customer")
-	private GenerateInvoice generateInvoice;
 	public Customer() {
 		
 	}
 
 	
 
-public Customer(int customerId, String customerName, String phoneNumber, String emailId, Date dateOfBirth,
-			String password, List<Address> address, Date lastLogin, boolean isActive, Shipping shipping,
+	public Customer(int customerId, String customerName, String phoneNumber, String emailId, Date dateOfBirth,
+			String password, List<Address> address, Date lastLogin, String isActive, List<Shipping> shipping,
 			List<BankAccount> bank, List<ManagingCart> managingCart, List<Order> order, List<FeedBack> feedBack,
-			List<ReturnOrders> returnOrders, List<WishList> wishList, GenerateInvoice generateInvoice) {
+			List<ReturnOrders> returnOrders, List<WishList> wishList) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
@@ -81,22 +96,11 @@ public Customer(int customerId, String customerName, String phoneNumber, String 
 		this.feedBack = feedBack;
 		this.returnOrders = returnOrders;
 		this.wishList = wishList;
-		this.generateInvoice = generateInvoice;
 	}
 
 
 
-public GenerateInvoice getGenerateInvoice() {
-		return generateInvoice;
-	}
-
-
-public void setGenerateInvoice(GenerateInvoice generateInvoice) {
-		this.generateInvoice = generateInvoice;
-	}
-
-
-public List<ReturnOrders> getReturnOrders() {
+	public List<ReturnOrders> getReturnOrders() {
 		return returnOrders;
 	}
 
@@ -156,14 +160,14 @@ public List<ReturnOrders> getReturnOrders() {
 		this.password = password;
 	}
 
-	public List<Address> getAddress() {
+	/*public List<Address> getAddress() {
 		return address;
-	}
+	}*/
 
-	public void setAddress(List<Address> address) {
+	/*public void setAddress(List<Address> address) {
 		this.address = address;
 	}
-
+*/
 	public Date getLastLogin() {
 		return lastLogin;
 	}
@@ -172,27 +176,21 @@ public List<ReturnOrders> getReturnOrders() {
 		this.lastLogin = lastLogin;
 	}
 
-	
-
-	public boolean isActive() {
+	public String getIsActive() {
 		return isActive;
 	}
 
-
-
-	public void setActive(boolean isActive) {
+	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
 
-
-
-	public Shipping getShipping() {
+	/*public Shipping getShipping() {
 		return shipping;
 	}
 
 	public void setShipping(Shipping shipping) {
 		this.shipping = shipping;
-	}
+	}*/
 
 	public List<BankAccount> getBank() {
 		return bank;
@@ -210,13 +208,13 @@ public List<ReturnOrders> getReturnOrders() {
 		this.managingCart = managingCart;
 	}
 
-	public List<Order> getOrder() {
+	/*public List<Order> getOrder() {
 		return order;
 	}
 
 	public void setOrder(List<Order> order) {
 		this.order = order;
-	}
+	}*/
 
 	public List<FeedBack> getFeedBack() {
 		return feedBack;

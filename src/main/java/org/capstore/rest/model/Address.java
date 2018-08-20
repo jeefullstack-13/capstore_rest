@@ -1,5 +1,7 @@
 package org.capstore.rest.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,10 +32,9 @@ public class Address {
 	private String state;
 	private String country;
 	private int zipcode; 
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="shippingId")
+	@OneToMany(targetEntity = Shipping.class, mappedBy = "shippingAddress")
 	
-	private Shipping shipping;
+	private List<Shipping> shipping;
 	
 	
 	public int getAddressId() {
@@ -84,19 +86,14 @@ public class Address {
 	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
-	public Shipping getShipping() {
+	public List<Shipping> getShipping() {
 		return shipping;
 	}
-	public void setShipping(Shipping shipping) {
+	public void setShipping(List<Shipping> shipping) {
 		this.shipping = shipping;
 	}
-	
-	
-	public Address() {
-		
-	}
 	public Address(int addressId, Customer customer, Merchant merchant, String streetNumber, String city, String state,
-			String country, int zipcode, Shipping shipping) {
+			String country, int zipcode, List<Shipping> shipping) {
 		super();
 		this.addressId = addressId;
 		this.customer = customer;
@@ -108,6 +105,7 @@ public class Address {
 		this.zipcode = zipcode;
 		this.shipping = shipping;
 	}
+	
 	
 	
 
