@@ -25,12 +25,16 @@ public class Inventory {
 	private int productId;
 	private String productName;
 	private String description;
-	private int brandId;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="brandId")
+	private Brand brand;
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="merchantId")
 	private Merchant merchant;
 	private int noOfViews;
-	private String Category;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="categoryId")
+	private Category category;
 	private Date dateOfInclusion;
 	private double price;
 	@OneToMany(targetEntity=ProductImages.class, mappedBy="inventory")
@@ -39,10 +43,10 @@ public class Inventory {
 	private Date expiryDate;
 	@OneToOne(targetEntity = ManagingCart.class, mappedBy = "inventory")
 	private ManagingCart managingCart;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="discountId")
 	private Discount discount;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="couponId")
 	private Coupons coupon;
 	@OneToMany(targetEntity=FeedBack.class, mappedBy="inventory")
@@ -76,12 +80,15 @@ public class Inventory {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getBrandId() {
-		return brandId;
+	
+	public Brand getBrand() {
+		return brand;
 	}
-	public void setBrandId(int brandId) {
-		this.brandId = brandId;
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
+
 	public Merchant getMerchant() {
 		return merchant;
 	}
@@ -94,12 +101,19 @@ public class Inventory {
 	public void setNoOfViews(int noOfViews) {
 		this.noOfViews = noOfViews;
 	}
-	public String getCategory() {
-		return Category;
+	
+	
+
+	
+
+	public Category getCategory() {
+		return category;
 	}
-	public void setCategory(String category) {
-		Category = category;
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
+
 	public Date getDateOfInclusion() {
 		return dateOfInclusion;
 	}
@@ -172,18 +186,18 @@ public class Inventory {
 		this.invoiceProduct = invoiceProduct;
 	}
 
-	public Inventory(int productId, String productName, String description, int brandId, Merchant merchant,
-			int noOfViews, String category, Date dateOfInclusion, double price, List<ProductImages> uploadimage,
+	public Inventory(int productId, String productName, String description, Brand brand, Merchant merchant,
+			int noOfViews, Category category, Date dateOfInclusion, double price, List<ProductImages> uploadimage,
 			int quantity, Date expiryDate, ManagingCart managingCart, Discount discount, Coupons coupon,
 			List<FeedBack> feedback, List<WishList> wishList, InvoiceProduct invoiceProduct) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.description = description;
-		this.brandId = brandId;
+		this.brand = brand;
 		this.merchant = merchant;
 		this.noOfViews = noOfViews;
-		Category = category;
+		this.category = category;
 		this.dateOfInclusion = dateOfInclusion;
 		this.price = price;
 		this.uploadimage = uploadimage;
@@ -196,19 +210,7 @@ public class Inventory {
 		this.wishList = wishList;
 		this.invoiceProduct = invoiceProduct;
 	}
-	
-	
 
 	
 	
-
-	
-
-	
-
-	
-	
-
-	
-	
-}
+	}
