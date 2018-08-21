@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v2")
 public class MerchantInventoryController {
 	@Autowired
-	private MerchInventoryService inventoryService;
+	private MerchInventoryService inventoryServiceMerch;
 	
 	 
 	@GetMapping("/brands")
 	public ResponseEntity<List<Brand>> getAllBrands(){
-		List<Brand> brands= inventoryService.getAllBrands();
+		List<Brand> brands= inventoryServiceMerch.getAllBrands();
 		if(brands.isEmpty()||brands==null)
 			return new ResponseEntity
 				("Sorry! Brand details not available!",HttpStatus.NOT_FOUND);
@@ -38,7 +38,7 @@ public class MerchantInventoryController {
 			
 	@GetMapping("/categories")
 	public ResponseEntity<List<Category>> getAllCategories(){
-		List<Category> categories= inventoryService.getAllCategories();
+		List<Category> categories= inventoryServiceMerch.getAllCategories();
 		if(categories.isEmpty()||categories==null)
 			return new ResponseEntity
 				("Sorry! Categories details not available!",HttpStatus.NOT_FOUND);
@@ -49,7 +49,7 @@ public class MerchantInventoryController {
 	
 	@GetMapping("/prods")
 	public ResponseEntity<List<Inventory>> getAllProds(){
-		List<Inventory> products= inventoryService.getAll();
+		List<Inventory> products= inventoryServiceMerch.getAll();
 		if(products.isEmpty()||products==null)
 			return new ResponseEntity
 				("Sorry! Products details not available!",HttpStatus.NOT_FOUND);
@@ -60,7 +60,7 @@ public class MerchantInventoryController {
 	@GetMapping("/merchantProfile/{merchantId}")
 	public ResponseEntity<Merchant> findPilot(@PathVariable ("merchantId") Integer merchantId ) {
 		
-		Merchant merch=inventoryService.getMerch(merchantId);
+		Merchant merch=inventoryServiceMerch.getMerch(merchantId);
 		if(merch==null)
 			return new ResponseEntity
 				("Sorry! Pilot details not available!",HttpStatus.NOT_FOUND);
@@ -69,7 +69,7 @@ public class MerchantInventoryController {
 	
 	@GetMapping("/merchantProfile")
 	public ResponseEntity<List<Merchant>> getAllCustomer(){
-		List<Merchant> merch= inventoryService.getAllMerch();
+		List<Merchant> merch= inventoryServiceMerch.getAllMerch();
 		if(merch.isEmpty()||merch==null)
 			return new ResponseEntity
 				("Sorry! Customer details not available!",HttpStatus.NOT_FOUND);
@@ -79,7 +79,7 @@ public class MerchantInventoryController {
 	
 	@GetMapping("/prods/{productName}")
 	public ResponseEntity<Inventory> getAllDetails(@PathVariable ("productName") String productName){
-		Inventory invent= inventoryService.getProduct(productName);
+		Inventory invent= inventoryServiceMerch.getProduct(productName);
 		if(invent==null)
 			return new ResponseEntity
 				("Sorry! Customer details not available!",HttpStatus.NOT_FOUND);
@@ -89,7 +89,7 @@ public class MerchantInventoryController {
 	
 	@PostMapping("/addProd")
 	public ResponseEntity<Inventory> createProduct(@RequestBody Inventory product) {
-		inventoryService.save(product);
+		inventoryServiceMerch.save(product);
 		
 		return new ResponseEntity<Inventory>(product,HttpStatus.OK);
 	}
@@ -98,7 +98,7 @@ public class MerchantInventoryController {
 	@DeleteMapping("/products/{productId}")
 	public void deleteProduct(@PathVariable("productId") Integer productId) {
 		
-		inventoryService.delete(productId);
+		inventoryServiceMerch.delete(productId);
 		
 	}
 	
