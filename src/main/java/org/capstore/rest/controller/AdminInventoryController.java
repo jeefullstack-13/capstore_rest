@@ -1,11 +1,13 @@
 package org.capstore.rest.controller;
 
+import static org.hamcrest.CoreMatchers.containsString;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.capstore.rest.model.Brand;
+
 import org.capstore.rest.model.Category;
 import org.capstore.rest.model.Inventory;
-
+import org.capstore.rest.model.Merchant;
 import org.capstore.rest.service.InventoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-
 
 @RestController
 @RequestMapping("/api/v1")
@@ -40,31 +40,29 @@ public class AdminInventoryController {
 		
 		
 		for (Inventory c : inventory) {
-			if(c.getProductName().contains(productName)) {
+			if(c.getProductName().toLowerCase().contains(productName)) {
 				
 				Inventory inv=new Inventory();
 				inv.setProductId(c.getProductId());
 				inv.setProductName(c.getProductName());
 				inv.setPrice(c.getPrice());
 				inv.setCategory(c.getCategory());
-				inv.setDescription(c.getDescription());
 				
 				inventory1.add(inv);
 			}
 			
 		}
-		if(inventory1==null)
+		if(inventory1==null||inventory1.isEmpty())
 			return new ResponseEntity
 				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Inventory>>(inventory1,HttpStatus.OK);
 	}
-	/*@RequestMapping("/admininventory1/electronics")*/
 	@RequestMapping("/admininventory1/{category1}")
-	public ResponseEntity<List<Inventory>> findInventory1() {
+	public ResponseEntity<List<Inventory>> findInventory1(@PathVariable("category1") String category1) {
 		List<Inventory> inventory= inventoryService.getAllInventory();
 		List<Inventory> inventory1=new ArrayList();
 		
-		String category1="Electronics";
+		category1="Electronics";
 		for (Inventory c : inventory) {
 			Category category= c.getCategory();
 			String cat=category.getCategoryName();
@@ -78,12 +76,11 @@ public class AdminInventoryController {
 				inv.setCategory(c.getCategory());
 				inv.setDescription(c.getDescription());
 				
-				
 				inventory1.add(inv);
 			}
 			
 		}
-		if(inventory1==null)
+		if(inventory1==null||inventory1.isEmpty())
 			return new ResponseEntity
 				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Inventory>>(inventory1,HttpStatus.OK);
@@ -109,7 +106,7 @@ public class AdminInventoryController {
 			}
 			
 		}
-		if(inventory1==null)
+		if(inventory1==null ||inventory1.isEmpty())
 			return new ResponseEntity
 				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Inventory>>(inventory1,HttpStatus.OK);
@@ -137,9 +134,34 @@ public class AdminInventoryController {
 			}
 			
 		}
-		if(inventory1==null)
+		if(inventory1==null || inventory1.isEmpty())
 			return new ResponseEntity
 				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Inventory>>(inventory1,HttpStatus.OK);
+	}
+	
+	@RequestMapping("/admininventory4/{productName}")
+	public ResponseEntity<List<Inventory>> findInventory4(@PathVariable("productName") String productName) {
+		List<Inventory> inventory= inventoryService.getAllInventory();
+		List<Inventory> inventory1=new ArrayList();
+		
+		
+		for (Inventory c : inventory) {
+			if(c.getMerchant().getMerchantId()==1 && c.getProductName().toLowerCase().contains(productName)) {
+				
+				Inventory inv=new Inventory();
+				inv.setProductId(c.getProductId());
+				inv.setProductName(c.getProductName());
+				inv.setPrice(c.getPrice());
+				inv.setCategory(c.getCategory());
+				
+				inventory1.add(inv);
+			}
+			
+		}
+		/*if(inventory1==null|| inventory1.isEmpty())
+			return new ResponseEntity
+				("Sorry! Inventory details not available!",HttpStatus.NOT_FOUND);*/
 		return new ResponseEntity<List<Inventory>>(inventory1,HttpStatus.OK);
 	}
 }

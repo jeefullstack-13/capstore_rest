@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping("/api/v1")
 public class AdminMerchantController {
@@ -41,7 +42,7 @@ public class AdminMerchantController {
 		
 		
 		for (Merchant c : merchant) {
-			if(c.getMerchantname().contains(name)) {
+			if(c.getMerchantname().toLowerCase().contains(name)) {
 				
 				Merchant mer=new Merchant();
 				mer.setMerchantId(c.getMerchantId());
@@ -53,12 +54,11 @@ public class AdminMerchantController {
 				merchant1.add(mer);
 			}
 		}
-		if(merchant1==null)
+		if(merchant1==null || merchant1.isEmpty())
 			return new ResponseEntity
 				("Sorry! Merchant details not available!",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Merchant>>(merchant1,HttpStatus.OK);
 	}
-	
 	@GetMapping("/merchantForValidation")
 	public ResponseEntity<List<Merchant>> merchantForValidation(){
 		

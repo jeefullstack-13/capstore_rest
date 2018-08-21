@@ -11,4 +11,7 @@ public interface ICustomerService {
 	Customer findOne(Integer customerId);
 
 	List<Customer> getAllCustomer();
+	public List<Customer> getAllCustomers();
+
+
 }

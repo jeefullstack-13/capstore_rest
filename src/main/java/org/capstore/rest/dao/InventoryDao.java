@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository("inventoryDao")
 
-
+@Transactional
 public interface InventoryDao extends JpaRepository<Inventory, Integer>{
 	
 	@Query("select i from Inventory i where i.productName=:product")

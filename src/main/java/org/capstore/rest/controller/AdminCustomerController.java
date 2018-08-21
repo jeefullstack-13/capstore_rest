@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
 @RestController
 @RequestMapping("/api/v1")
 
@@ -51,7 +53,7 @@ public class AdminCustomerController {
     		
     		
     		for (Customer c : customer) {
-				if(c.getCustomerName().contains(customerName)) {
+				if(c.getCustomerName().toLowerCase().contains(customerName)) {
 					
 					Customer cust=new Customer();
 					cust.setCustomerId(c.getCustomerId());
@@ -63,7 +65,7 @@ public class AdminCustomerController {
 				}
 						
 			}
-    		if(customer1==null)
+    		if(customer1==null || customer1.isEmpty())
     			return new ResponseEntity
     				("Sorry! Customer details not available!",HttpStatus.NOT_FOUND);
     		return new ResponseEntity<List<Customer>>(customer1,HttpStatus.OK);
