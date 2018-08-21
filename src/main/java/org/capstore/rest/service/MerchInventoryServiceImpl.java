@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-@Service("inventoryService")
+@Service("inventoryServiceMerch")
 @Transactional
 public class MerchInventoryServiceImpl implements MerchInventoryService {
 	@Autowired
