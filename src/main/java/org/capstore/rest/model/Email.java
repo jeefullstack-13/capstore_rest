@@ -24,9 +24,7 @@ public class Email {
 	private String subject;
 	@JsonFormat(pattern="dd-MMM-yyyy")
 	private Date date;
-	@OneToOne(targetEntity = Shipping.class, mappedBy = "email") 
-	private Shipping shippingAddress;
-	public Email() {
+		public Email() {
 		
 	}
 	
@@ -40,13 +38,6 @@ public class Email {
 	}
 
 
-	public Shipping getShippingAddress() {
-		return shippingAddress;
-	}
-
-	public void setShippingAddress(Shipping shippingAddress) {
-		this.shippingAddress = shippingAddress;
-	}
 
 	public String getFrom_emailId() {
 		return from_emailId;
@@ -79,8 +70,7 @@ public class Email {
 		this.date = date;
 	}
 
-	public Email(int eID, String from_emailId, String to_emailId, String body, String subject, Date date,
-			Shipping shippingAddress) {
+	public Email(int eID, String from_emailId, String to_emailId, String body, String subject, Date date) {
 		super();
 		this.eID = eID;
 		this.from_emailId = from_emailId;
@@ -88,7 +78,7 @@ public class Email {
 		this.body = body;
 		this.subject = subject;
 		this.date = date;
-		this.shippingAddress = shippingAddress;
+		
 	}
 
 
