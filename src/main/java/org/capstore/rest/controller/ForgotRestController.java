@@ -54,7 +54,7 @@ public class ForgotRestController {
 		for (Merchant m : merchant1) {
 			if(m.getEmailId().toString().equals(emailId)) {
 				merchant.setMerchantId(m.getMerchantId());
-				merchant.setName(m.getName());
+				merchant.setMerchantname(m.getMerchantname());
 				merchant.setPhoneNo(m.getPhoneNo());
 				merchant.setEmailId(m.getEmailId());
 				merchant.setPassword(m.getPassword());

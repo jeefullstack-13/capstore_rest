@@ -1,5 +1,4 @@
 package org.capstore.rest.model;
-
 import java.util.Date;
 import java.util.List;
 
@@ -15,10 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.UniqueConstraint;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"})
 public class Customer {
 
 	@Id
@@ -27,45 +23,29 @@ public class Customer {
 	private int customerId;
 	private String customerName;
 	private String phoneNumber;
-	
-	
-	
 	@Column(unique=true)
 	private String emailId;
 	private Date dateOfBirth;
 	private String password;
-	
-	
 	@OneToMany(targetEntity = Address.class, mappedBy = "customer")
 	private List<Address> address;
 	private Date lastLogin;
 	private String isActive;
-	
-	
-	@OneToMany(targetEntity = Shipping.class, mappedBy = "customer")
-	private List<Shipping> shipping;
-	
-	
+	@OneToOne(targetEntity = Shipping.class, mappedBy = "customer")
+	private Shipping shipping;
 	@OneToMany(targetEntity = BankAccount.class, mappedBy = "customer")
 	private List<BankAccount> bank;
-	
-	
 	@OneToMany(targetEntity = ManagingCart.class, mappedBy = "customer")
 	private List<ManagingCart> managingCart;
-	
-	
 	@OneToMany(targetEntity = Order.class, mappedBy = "customer")
 	private List<Order> order;
-	
 	
 	@OneToMany(targetEntity = FeedBack.class, mappedBy = "customer")
 	private List<FeedBack> feedBack;
 	
-	
 	@OneToMany(targetEntity = ReturnOrders.class, mappedBy = "customer")
 	private List<ReturnOrders> returnOrders; 
 
-	
 	@OneToMany(targetEntity = WishList.class, mappedBy = "customer")
 	private List<WishList> wishList;
 	
@@ -76,7 +56,7 @@ public class Customer {
 	
 
 	public Customer(int customerId, String customerName, String phoneNumber, String emailId, Date dateOfBirth,
-			String password, List<Address> address, Date lastLogin, String isActive, List<Shipping> shipping,
+			String password, List<Address> address, Date lastLogin, String isActive, Shipping shipping,
 			List<BankAccount> bank, List<ManagingCart> managingCart, List<Order> order, List<FeedBack> feedBack,
 			List<ReturnOrders> returnOrders, List<WishList> wishList) {
 		super();
@@ -160,14 +140,14 @@ public class Customer {
 		this.password = password;
 	}
 
-	/*public List<Address> getAddress() {
+	public List<Address> getAddress() {
 		return address;
-	}*/
+	}
 
-	/*public void setAddress(List<Address> address) {
+	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
-*/
+
 	public Date getLastLogin() {
 		return lastLogin;
 	}
@@ -184,13 +164,13 @@ public class Customer {
 		this.isActive = isActive;
 	}
 
-	/*public Shipping getShipping() {
+	public Shipping getShipping() {
 		return shipping;
 	}
 
 	public void setShipping(Shipping shipping) {
 		this.shipping = shipping;
-	}*/
+	}
 
 	public List<BankAccount> getBank() {
 		return bank;
@@ -208,13 +188,13 @@ public class Customer {
 		this.managingCart = managingCart;
 	}
 
-	/*public List<Order> getOrder() {
+	public List<Order> getOrder() {
 		return order;
 	}
 
 	public void setOrder(List<Order> order) {
 		this.order = order;
-	}*/
+	}
 
 	public List<FeedBack> getFeedBack() {
 		return feedBack;

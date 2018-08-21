@@ -41,11 +41,11 @@ public class AdminMerchantController {
 		
 		
 		for (Merchant c : merchant) {
-			if(c.getName().contains(name)) {
+			if(c.getMerchantname().contains(name)) {
 				
 				Merchant mer=new Merchant();
 				mer.setMerchantId(c.getMerchantId());
-				mer.setName(c.getName());
+				mer.setMerchantname(c.getMerchantname());
 				mer.setCompanyName(c.getCompanyName());
 				mer.setPhoneNo(c.getPhoneNo());
 				
@@ -80,7 +80,7 @@ public class AdminMerchantController {
 	public void approveMerchant(@PathVariable("merchantId")Integer merchantId) {
 		
 		Merchant merchant = merchantService.findMerchantById(merchantId);
-		merchant.setActive(true);
+		merchant.setIsActive("yes");
 		
 		merchantService.saveMerchant(merchant);
 	}

@@ -7,10 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "created"}) 
 public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
